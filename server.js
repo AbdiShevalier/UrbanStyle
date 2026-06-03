@@ -115,7 +115,7 @@ app.post('/api/tryon', async (req, res) => {
   if (demoMode) {
     return res.json({ ok: true, mode: 'demo', resultImage: buildDemoLookSVG(garments),
       applied: garments.map((g) => g.category),
-      message: HAS_REPLICATE ? 'Vista demo del look completo.' : 'Vista demo. Añade REPLICATE_API_TOKEN para el try-on con IA.' });
+      message: HAS_REPLICATE ? 'Vista demo del look completo.' : 'Vista demo. Modo IA Proximamente.' });
   }
 
   const bodyOrder = ['superior', 'inferior'];

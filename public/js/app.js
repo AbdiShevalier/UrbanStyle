@@ -477,7 +477,7 @@ function buildGarmentDescription(p) {
 function wireEngineToggle() {
   $('#mode-demo') && $('#mode-demo').addEventListener('click', () => setEngineMode('demo'));
   $('#mode-ia') && $('#mode-ia').addEventListener('click', () => {
-    if (STATE.mode !== 'live') { toast('Para usar IA, configura REPLICATE_API_TOKEN en .env', 'info', 5000); return; }
+    if (STATE.mode !== 'live') { toast('Modo IA Proximamente | sin cash', 'info', 5000); return; }
     setEngineMode('ia');
   });
 }
