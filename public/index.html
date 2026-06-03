@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Urban Style — pruébate la ropa sobre tu propia foto antes de comprar. Probador virtual para tiendas de moda." />
+  <title>Urban Style · Probador Virtual</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Para deploy separado, pon aquí la URL del backend (Render/Railway) -->
+  <script>
+    window.URBAN_CONFIG = { apiBase: '' }; // '' = mismo origen
+  </script>
+</head>
+<body>
+  <canvas id="bg-particles" aria-hidden="true"></canvas>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <header class="nav glass">
+    <a class="brand" href="#inicio" data-view="inicio">
+      <span class="brand-mark"></span>
+      <span class="brand-text">URBAN<span>STYLE</span></span>
+    </a>
+    <nav id="nav-links" class="nav-links">
+      <a class="nav-link" data-view="inicio" href="#inicio">Inicio</a>
+      <a class="nav-link" data-view="perfil" href="#perfil">Perfil</a>
+      <a class="nav-link" data-view="catalogo" href="#catalogo">Catálogo</a>
+      <a class="nav-link" data-view="outfits" href="#outfits">Outfits</a>
+      <a class="nav-link" data-view="probador" href="#probador">Probador</a>
+      <a class="nav-link" data-view="recomendaciones" href="#recomendaciones">Consejos</a>
+    </nav>
+    <div class="nav-right">
+      <span id="mode-badge" class="mode-badge"><span class="badge-dot"></span>MODO DEMO</span>
+      <button class="btn btn-glow" data-quickdemo>Probar demo</button>
+      <button id="nav-burger" class="nav-burger" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ── INICIO ──────────────────────────────────────── -->
+    <section id="view-inicio" class="view active">
+      <div class="hero">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">PROBADOR VIRTUAL</span>
+          <h1>Mira cómo te queda.<br/><em>Antes</em> de comprar.</h1>
+          <p class="lead">Urban Style deja que tus clientes se prueben la ropa sobre su propia foto. Más ventas, menos devoluciones.</p>
+          <div class="hero-cta">
+            <button class="btn btn-glow btn-lg" data-quickdemo>▶ Probar demo</button>
+            <button class="btn btn-outline btn-lg" data-goto="perfil">Subir mi foto</button>
+          </div>
+          <div class="hero-stats">
+            <div><strong>+30%</strong><span>más ventas</span></div>
+            <div><strong>−40%</strong><span>devoluciones</span></div>
+            <div><strong>30s</strong><span>por prueba</span></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="hero-card glass">
+            <div class="scan-frame">
+              <img src="assets/demo/avatar-1.svg" alt="Ejemplo Urban Style" />
+              <div class="scan-line"></div>
+            </div>
+            <div class="hero-card-foot"><span class="badge-dot"></span> Probador · IDM-VTON</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title reveal">Cómo funciona</h2>
+        <div class="steps">
+          <div class="step reveal"><span class="step-n">01</span><h3>Sube tu foto</h3><p>Una foto de cuerpo entero. O usa un perfil de ejemplo.</p></div>
+          <div class="step reveal"><span class="step-n">02</span><h3>Elige prendas</h3><p>Del catálogo o sube las tuyas. Arma el outfit completo.</p></div>
+          <div class="step reveal"><span class="step-n">03</span><h3>Pruébatelas</h3><p>La IA te viste con la ropa y respeta tu cara y tu postura.</p></div>
+          <div class="step reveal"><span class="step-n">04</span><h3>Decide</h3><p>Talla, color y look completo en segundos.</p></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="feature-grid">
+          <div class="feature glass reveal"><h3>Pruebas reales</h3><p>No son montajes ni recortes. La IA coloca la ropa sobre el cuerpo con IDM-VTON.</p></div>
+          <div class="feature glass reveal"><h3>Te aconseja</h3><p>Talla, colores y combinaciones. Funciona también sin OpenAI.</p></div>
+          <div class="feature glass reveal"><h3>Para tu tienda</h3><p>Catálogo editable y listo para crecer a Firebase o Supabase.</p></div>
+        </div>
+      </div>
+
+      <div class="section brands">
+        <p class="muted center">Catálogo de ejemplo con marcas conocidas</p>
+        <div class="brand-strip reveal">
+          <span>DIOR</span><span>VALENTINO</span><span>GUCCI</span><span>PRADA</span>
+          <span>LOUIS VUITTON</span><span>ZARA</span><span>NIKE</span><span>CARTIER</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PERFIL ──────────────────────────────────────── -->
+    <section id="view-perfil" class="view">
+      <div class="section">
+        <span class="eyebrow">PASO 1</span>
+        <h2 class="section-title">Tu perfil</h2>
+        <p class="muted">Sube tu foto o usa un perfil de ejemplo. Todo se guarda en tu dispositivo.</p>
+
+        <div class="profile-layout">
+          <div class="profile-photo glass">
+            <div id="pf-drop" class="dropzone">
+              <img id="pf-photo-preview" alt="Foto de perfil" style="display:none" />
+              <div id="pf-drop-hint" class="dropzone-hint">
+                <span class="drop-ico">⤒</span>
+                <p>Arrastra tu foto de cuerpo entero<br/>o haz clic para subir</p>
+              </div>
+              <button id="pf-clear-photo" class="photo-x" title="Quitar foto" style="display:none">✕</button>
+            </div>
+            <input id="pf-photo" type="file" accept="image/*" hidden />
+            <p class="muted small">Mejor con foto de cuerpo entero, buena luz y fondo simple.</p>
+            <h4>Perfiles de ejemplo</h4>
+            <div id="demo-profiles" class="demo-profiles"></div>
+          </div>
+
+          <form id="profile-form" class="profile-form glass">
+            <div class="field"><label>Nombre</label><input id="pf-nombre" type="text" placeholder="Tu nombre" /></div>
+            <div class="grid-2">
+              <div class="field"><label>Altura (cm)</label><input id="pf-altura" type="number" placeholder="175" /></div>
+              <div class="field"><label>Calzado (EU)</label><input id="pf-calzado" type="number" placeholder="42" /></div>
+            </div>
+            <div class="grid-3">
+              <div class="field"><label>Pecho (cm)</label><input id="pf-pecho" type="number" placeholder="98" /></div>
+              <div class="field"><label>Cintura (cm)</label><input id="pf-cintura" type="number" placeholder="82" /></div>
+              <div class="field"><label>Cadera (cm)</label><input id="pf-cadera" type="number" placeholder="96" /></div>
+            </div>
+            <div class="grid-2">
+              <div class="field"><label>Hombros (cm)</label><input id="pf-hombros" type="number" placeholder="46" /></div>
+              <div class="field"><label>Pierna (cm)</label><input id="pf-pierna" type="number" placeholder="80" /></div>
+            </div>
+            <div class="grid-3">
+              <div class="field"><label>Complexión</label><select id="pf-complexion"></select></div>
+              <div class="field"><label>Estilo</label><select id="pf-estilo"></select></div>
+              <div class="field"><label>Ocasión</label><select id="pf-ocasion"></select></div>
+            </div>
+            <div class="field"><label>Notas</label><textarea id="pf-preferencias" rows="2" placeholder="Lo que te gusta: colores, cortes…"></textarea></div>
+            <button class="btn btn-glow" type="submit">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CATÁLOGO ────────────────────────────────────── -->
+    <section id="view-catalogo" class="view">
+      <div class="section">
+        <span class="eyebrow">PASO 2</span>
+        <h2 class="section-title">Catálogo</h2>
+        <p class="muted">Añade prendas a tu look (una por tipo) y pruébatelas en el Probador.</p>
+        <div class="catalog-bar glass">
+          <input id="filter-search" type="search" placeholder="Buscar prenda o marca…" />
+          <select id="filter-cat"></select>
+          <select id="filter-brand"></select>
+          <select id="filter-style"></select>
+          <span id="catalog-count" class="muted small"></span>
+          <button id="admin-toggle" class="btn btn-mini btn-outline">⚙ Admin</button>
+        </div>
+
+        <div id="admin-panel" class="admin-panel glass">
+          <h3>Productos (admin)</h3>
+          <div class="admin-grid">
+            <form id="admin-form" class="admin-form">
+              <div class="grid-2">
+                <div class="field"><label>Nombre</label><input id="adm-name" type="text" required /></div>
+                <div class="field"><label>Marca</label><input id="adm-brand" type="text" required /></div>
+              </div>
+              <div class="grid-3">
+                <div class="field"><label>Categoría</label><select id="adm-cat"></select></div>
+                <div class="field"><label>Estilo</label><select id="adm-style"></select></div>
+                <div class="field"><label>Ocasión</label><select id="adm-occ"></select></div>
+              </div>
+              <div class="grid-3">
+                <div class="field"><label>Color</label><input id="adm-color" type="color" value="#1f6f78" /></div>
+                <div class="field"><label>Nombre color</label><input id="adm-color-name" type="text" placeholder="Azul petróleo" /></div>
+                <div class="field"><label>Ajuste</label><input id="adm-fit" type="text" placeholder="slim / regular" /></div>
+              </div>
+              <div class="field"><label>Tallas (con comas)</label><input id="adm-sizes" type="text" placeholder="S, M, L, XL" /></div>
+              <div class="field">
+                <label>Imagen</label>
+                <input id="adm-image" type="file" accept="image/*" />
+                <img id="adm-preview" alt="preview" style="display:none" />
+              </div>
+              <div class="admin-form-actions">
+                <button id="admin-submit" class="btn btn-glow" type="submit">Añadir producto</button>
+                <button id="admin-reset" class="btn btn-ghost" type="button">Limpiar</button>
+              </div>
+            </form>
+            <div id="admin-list" class="admin-list"></div>
+          </div>
+        </div>
+
+        <div id="catalog-grid" class="catalog-grid"></div>
+      </div>
+    </section>
+
+    <!-- ── OUTFITS ─────────────────────────────────────── -->
+    <section id="view-outfits" class="view">
+      <div class="section">
+        <span class="eyebrow">PASO 3</span>
+        <h2 class="section-title">Outfits</h2>
+        <p class="muted">Combinaciones listas según tu estilo y la ocasión. Pruébate cualquiera con un clic.</p>
+        <div class="outfit-bar glass">
+          <div class="field"><label>Ocasión</label><select id="out-occ"></select></div>
+          <div class="field"><label>Estilo</label><select id="out-style"></select></div>
+          <button id="gen-outfits" class="btn btn-glow">Armar outfits</button>
+          <span id="outfits-source" class="muted small"></span>
+        </div>
+        <div id="outfits-result" class="outfits-grid"></div>
+      </div>
+    </section>
+
+    <!-- ── PROBADOR ────────────────────────────────────── -->
+    <section id="view-probador" class="view">
+      <div class="section">
+        <span class="eyebrow">PASO 4</span>
+        <h2 class="section-title">Probador</h2>
+        <p class="muted">Arma tu look y pruébatelo. En IA, la app te viste de verdad; en demo, ves el look al instante.</p>
+
+        <div class="tryon-layout">
+          <div class="tryon-controls glass">
+            <div class="tryon-head">
+              <h4>Tu foto</h4>
+              <label class="btn btn-mini btn-outline file-btn">Cambiar<input id="tryon-photo" type="file" accept="image/*" hidden /></label>
+            </div>
+            <div id="tryon-stage" class="tryon-subject scan-frame">
+              <img id="tryon-subject-img" src="assets/demo/subject.svg" alt="Sujeto" />
+              <div class="scan-line"></div>
+              <span id="tryon-subject-label" class="subject-label">Sujeto demo</span>
+              <button id="tryon-clear-photo" class="photo-x" title="Quitar foto" style="display:none">✕</button>
+            </div>
+
+            <h4>Cómo generar</h4>
+            <div class="seg" role="tablist">
+              <button id="mode-demo" class="seg-btn on">Demo</button>
+              <button id="mode-ia" class="seg-btn">IA real</button>
+            </div>
+            <p id="tryon-mode-hint" class="muted small"></p>
+
+            <div class="tryon-head">
+              <h4>Tu look <span id="look-count" class="muted small"></span></h4>
+              <button id="tryon-clear-look" class="btn btn-mini btn-ghost">Vaciar</button>
+            </div>
+            <div id="look-slots" class="look-slots"></div>
+
+            <button id="tryon-generate" class="btn btn-glow btn-lg">⚡ Generar look</button>
+
+            <h4>Tu canasto</h4>
+            <div id="basket-list" class="basket-list"></div>
+          </div>
+
+          <div class="tryon-output glass">
+            <div id="tryon-result" class="tryon-result">
+              <div class="tryon-placeholder">
+                <span class="drop-ico">✦</span>
+                <p>Aquí verás tu look.<br/>Añade prendas y pulsa <strong>Generar look</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONSEJOS ────────────────────────────────────── -->
+    <section id="view-recomendaciones" class="view">
+      <div class="section">
+        <span class="eyebrow">CONSEJOS</span>
+        <h2 class="section-title">Qué te queda mejor</h2>
+        <p class="muted">Tallas, colores y por qué combina, según tu perfil.</p>
+        <button id="gen-recommend" class="btn btn-glow">Ver mis consejos</button>
+        <div id="recommend-result" class="recommend-result"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer glass">
+    <div class="footer-brand"><span class="brand-mark"></span> URBAN STYLE</div>
+    <p class="muted small">Probador virtual para tiendas de moda. Proyecto demo · IA: IDM-VTON (Replicate) y OpenAI.</p>
+  </footer>
+
+  <div id="toasts" class="toasts"></div>
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" onclick="closeModal()"></div>
+    <div class="modal-card glass">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

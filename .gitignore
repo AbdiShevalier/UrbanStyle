@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno (¡nunca subas tus claves!)
+.env
+
+# Archivos subidos por usuarios en runtime
+uploads/*
+!uploads/.gitkeep
+
+# Resultados generados en runtime
+public/assets/generated/*
+!public/assets/generated/.gitkeep
+
+# Logs y sistema
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Build / deploy
+.vercel
+.cache

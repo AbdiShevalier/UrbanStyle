@@ -1,0 +1,30 @@
+{
+  "name": "urban-style-studio",
+  "version": "1.0.0",
+  "description": "Urban Style — plataforma fashion-tech de Virtual Try-On (Probador Digital) para boutiques y marcas premium.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test/engine.test.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "virtual-try-on",
+    "fashion-tech",
+    "idm-vton",
+    "replicate",
+    "ecommerce",
+    "openai"
+  ],
+  "author": "Urban Style",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

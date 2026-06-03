@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="760" viewBox="0 0 480 760">
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#16323b"/><stop offset="1" stop-color="#0d1b22"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="22%" r="40%">
+      <stop offset="0" stop-color="#19e0e0" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#19e0e0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="480" height="760" fill="url(#abg)"/>
+  <ellipse cx="240" cy="170" rx="170" ry="170" fill="url(#halo)"/>
+  <g transform="translate(240,130)">
+    <path d="M-42,-30 C-42,-86 42,-86 42,-30 C42,2 24,30 0,30 C-24,30 -42,2 -42,-30 Z" fill="#2b2118"/>
+    <circle cx="0" cy="0" r="40" fill="#e7c6a5"/>
+    <path d="M-40,-26 C-40,-78 40,-78 40,-26 C28,-44 -28,-44 -40,-26 Z" fill="#2b2118"/>
+    <rect x="-14" y="36" width="28" height="26" fill="#e7c6a5"/>
+    <path d="M-70,70 L70,70 L92,250 L-92,250 Z" fill="#1f6f78"/>
+    <path d="M-70,70 L-110,210 L-82,224 L-50,96 Z" fill="#1f6f78"/>
+    <path d="M70,70 L110,210 L82,224 L50,96 Z" fill="#1f6f78"/>
+    <path d="M-82,250 L-8,250 L-16,520 L-72,520 Z" fill="#1a1a1d"/>
+    <path d="M8,250 L82,250 L72,520 L16,520 Z" fill="#1a1a1d"/>
+    <rect x="-74" y="520" width="62" height="26" rx="8" fill="#d8c089"/>
+    <rect x="14" y="520" width="62" height="26" rx="8" fill="#d8c089"/>
+  </g>
+  <rect x="30" y="30" width="56" height="3" fill="#19e0e0" opacity="0.8"/>
+  <text x="30" y="720" font-family="Montserrat,Arial" font-size="16" letter-spacing="3"
+        fill="#d6f7f7">PERFIL DEMO · ANDRÉS</text>
+</svg>
